@@ -23,9 +23,8 @@
           navigator.bluetooth
             .requestDevice({
 	      filters: [{
-	        name: 'Fairphone 3'
+	        services: ['battery_service']
 	      }],
-	      optionalServices: ['battery_service']
             })
             .then(function (device) {
 	      console.log(device);
@@ -39,7 +38,6 @@
       } else {
 	scan.disabled = true;
         output.innerHTML = 'Web Bluetooth not supported';
-	output.innerHTML += navigator.bluetooth;
       }
     </script>
   </body>
