@@ -1,0 +1,388 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Designing with sensor data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./reveal.css" />
+    <link rel="stylesheet" href="./reveal/theme/white.css" />
+    <style>
+      .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+
+      .reveal .license {
+        margin-bottom: 0;
+        margin-block-end: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 class="r-fit-text">
+            Designing with sensor data
+          </h1>
+          <p>FOSDEM 2021</p>
+          <p><small>by André Jaenisch on 6th February 2021</small></p>
+          <p><img src="qr-code.png" alt="" /></p>
+          <p>
+            <a href="https://jaenis.ch/hobbies/speaking/fosdem2021-javascript-device-sensors/">
+              jaenis.ch/hobbies/speaking/fosdem2021-javascript-device-sensors/
+            </a>
+          </p>
+          <p
+            xmlns:cc="http://creativecommons.org/ns#"
+            xmlns:dct="http://purl.org/dc/terms/"
+            >
+            <span class="visually-hidden">
+              <a
+                property="dct:title"
+                rel="cc:attributionURL"
+                href="https://jaenis.ch/hobbies/speaking/fosdem2021-javascript-device-sensors/"
+                >
+                Designing with sensor data
+              </a> by
+              <a
+                rel="cc:attributionURL dct:creator"
+                property="cc:attributionName"
+                href="https://fosdem.org/2021/schedule/speaker/andre_jaenisch/"
+                >
+                André Jaenisch
+              </a> is licensed under
+            </span>
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1"
+              target="_blank"
+              rel="license noopener noreferrer"
+              style="display:inline-block;"
+              >
+              <img
+                src="cc-by.png"
+                alt="Creative Commons Attribution 4.0 International"
+                class="license"
+                />
+              Attribution 4.0 International
+            </a>
+          </p>
+          <aside class="notes">
+            <p>
+              Welcome. This is my first time I'm talking at FOSDEM.
+              You can follow along with the slides via the link.
+            </p>
+            <p>
+              By the time this airs, I hope to be able to provide subtitles
+              for download. The content will be close to speaker notes you can
+              find behind the link.
+            </p>
+            <p>
+              My name is André Jaenisch.
+              I'm currently working as Software engineer at Jambit.
+              It's a medium-sized software provider from Germany.
+              This talk has no relationship with my work.
+            </p>
+            <p>
+              Since this reveal.js presentation is pre-recorded using OBS Studio,
+              please ask your questions at the end.
+              In between you will see scenes taken with ScreenCam on Android.
+              I would welcome if you would allow me to add your comments to
+              the presentation slides afterwards. Please tell me if you want to
+              opt-in.
+            </p>
+            <p>
+              Unless otherwise noted, the content is made available under the
+              Creative Commons Attribution 4.0 International license.
+            </p>
+          </aside>
+        </section>
+        <section>
+          <section>
+            <h2>Responsive Web Design</h2>
+            <img src="rwd.jpg" alt="Typical demo app in Responsive Web Design" />
+            <aside class="notes">
+              <p>Let's start with Responsive Web Design.</p>
+              <p>
+                I'm quite sure, you run into this picture in some form before.
+                It's the typical marketing image to depict a web app, that is
+                usable on different devices by adjusting the layout accordingly.
+              </p>
+            </aside>
+          </section>
+          <section>
+            <img src="morpheus.jpg" alt="Morpheus from Matrix" />
+            <aside class="notes">
+              <p>But what if I told you that this approach could fell short?</p>
+            </aside>
+          </section>
+          <section>
+            <img
+              src="samsung-galaxy-note-3.jpg"
+              alt="Samsung Galaxy Note 3 with pen"
+              />
+            <aside class="notes">
+              <p>
+                How would you classify this Samsung Galaxy Note 3 with a pen?
+                Is it a mobile? It is small enough for one.
+                But you have a pointer device; the pen.
+                So designing it for desktop? You would waste real-estate on
+                the screen after all.
+              </p>
+            </aside>
+          </section>
+          <section>
+            <img src="gamedevjs-theme.png" alt="Gamedev.js theme" />
+            <aside class="notes">
+              <p>
+                While I was preparing for the GameDev.js jam in early 2020 I
+                ran across a MDN article regarding sensor APIs. I was aware
+                of the ability to recognise motion and orientation from my
+                days with Firefox OS. But by now, there are more.
+                This talk will show you some tech demos. They're not ready for
+                production usage in general, since you need to toggle a flag
+                in your browser to get access to the underlying API.
+                But that shouldn't stop you to show off, what's possible on the
+                web :-)
+              </p>
+            </aside>
+          </section>
+        </section>
+        <section data-background-image="demo.jpg">
+          <h2 style="color:white;">Demo!</h2>
+          <p>
+            <a href="https://krausefx.github.io/user.activity/">
+              What's the user doing?
+            </a>
+          </p>
+          <aside class="notes">
+            <p>
+              This is a showcase I ran into years ago. It highlights the
+              impact on privacy, sensor data can have.
+            </p>
+          </aside>
+        </section>
+        <section>
+          <video data-autoplay src="user-activity.mp4"></video>
+        </section>
+        <section>
+          <section>
+            <h2>Detectar</h2>
+            <p><img src="detectar.png" alt="Detectar" /></p>
+            <p><a href="https://ryuno-ki.github.io/detectar/">Detectar</a></p>
+            <aside class="notes">
+              <p>
+                After the talk I decided to create a small demo site, which
+                runs some primitive checks on your device capabilities.
+              </p>
+              <p>
+                Since then, I started to design tooltips based on a hover media
+                query instead of guessing from the device width. I'm not quite
+                sure what the colours media query does. I can think of use cases
+                for optimising for eBook readers, though. Orientation can be used
+                if you have certain criteria. For example, showing a sidebar.
+                Device Motion and Orientation have we seen just now.
+                They got replaced by a Permission-based API. Accelerometer
+                measures the velocity. Ambient Light the light level around the
+                devices. I have a small demo for you here, too.
+                Web Bluetooth is available on Chrome behind a flag. I've also
+                got something prepared here.
+                Geolocation should be known from map apps.
+                Gyroscope tells you something about the position in space of
+                the device. We saw it in the user activity demo. For example,
+                when you have indication that the user is driving, perhaps
+                offer to read alout your blog post?
+                Magnetometer is measuring the magnet field of the earth.
+                I think, you should be able to measure the altitude roughly?
+                NFC or Near-Field Communication can be used on slow distances.
+                I have nothing similar available.
+              </p>
+            </aside>
+          </section>
+          <section>
+            <h2>What Can Web Do Today?</h2>
+            <p>
+              <img src="device-apis.png" alt="Device APIs overview" />
+            </p>
+            <p>
+              <a href="https://whatwebcando.today/">What Can Web Do Today?</a>
+            </p>
+            <aside class="notes">
+              <p>
+                While preparing the slides, I discovered this website.
+                I crammed the available stati for a screenshot. You can tell,
+                that my laptop has access to some APIs but only limited offer.
+              </p>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section data-background-image="demo.jpg">
+            <h2 style="color:white;">Demo!</h2>
+            <p style="color:white;">Ambient Light Sensor</p>
+            <aside class="notes">
+              <p>
+                As promised, I prepared a small demo for the Ambient Light
+                Sensor. You can see, that it required Chrome and an activated
+                flag. I can imagine adjustments in the colour palette depending
+                on where the user is right now. Think bright sunlight.
+                Or a basement. This could improve the reading experience.
+              </p>
+            </aside>
+          </section>
+          <section>
+            <video data-autoplay src="ambient-light.mp4"></video>
+          </section>
+        </section>
+        <section>
+          <section data-background-image="demo.jpg">
+            <h2 style="color:white;">Demo!</h2>
+            <p style="color:white;">Bluetooth</p>
+            <aside class="notes">
+              <p>
+                Did you know that you can use Bluetooth via your Web Browser?
+                It is a debated topic. But that shouldn't stop you from cool
+                tech demos :-)
+                Sadly, I had not the right equipment at home, so I show you a
+                demo where I scan for Bluetooth beacons around using Low Energy.
+              </p>
+            </aside>
+          </section>
+          <section>
+            <video data-autoplay src="bluetooth.mp4"></video>
+          </section>
+        </section>
+        <section>
+          <section data-background-image="demo.jpg">
+            <h2 style="color:white;">Demo!</h2>
+            <p style="color:white;">Voice Recognition</p>
+            <p>
+              <a href="https://wiki.mozilla.org/Web_Speech_API_-_Speech_Recognition#How_can_I_use_it.3F">
+                Web Speech API - Speech Recognition
+              </a>
+            </p>
+            <aside class="notes">
+              <p>
+                Most of Web Speech API you can find tell you that it only works
+                in Chrome. Not quite. There are two flags you need to flip to
+                make it work in Firefox.
+                For demo purposes, I'm going to show you Chromium, though.
+              </p>
+            </aside>
+          </section>
+        </section>
+        <section data-background-image="fugu.jpg">
+          <h2>Project Fugu</h2>
+          <div class="r-stack">
+            <p class="fragment">
+              <a href="https://infrequently.org/2020/06/platform-adjacency-theory/#fn-platform-adjacency-theory-4">
+                Platform Adjacency Theory
+              </a>
+            </p>
+            <p class="fragment">
+              <img src="sensors.png" alt="Device Sensors" />
+            </p>
+            <p class="fragment">
+              <a href="https://web.dev/fugu-status/">
+                Fugu status page
+              </a>
+            </p>
+          </div>
+          <aside class="notes">
+            <p>Let's talk about Project Fugu for a moment.</p>
+            <p>
+              It's an initiative at the Chromium project to push the web
+              forward by providing access to more sensor data. For one, to
+              catch up with native apps.
+              But also to enable new scenarios, we cannot even think of!
+              There's some pushback from Apple and Mozilla here.
+              If you are interested, read this blog post by Alex Russell.
+            </p>
+          </aside>
+        </section>
+        <section>
+          <section>
+            <h2>Picture credits</h2>
+            <p>
+              Flickr: <a href="https://flic.kr/p/ctUnbb">
+                The Plan Company
+              </a> by <a href="https://www.flickr.com/photos/aticoprimera/">
+                Alvaro Rubio
+              </a> (<a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">
+                CC BY-NC-ND
+              </a>)
+            </p>
+            <p>
+              Flickr: <a href="https://flic.kr/p/2kmaS7Y">
+                89 Morpheus
+              </a> by <a href="https://www.flickr.com/photos/felton-nyc/">
+                Felton Davis
+              </a> (<a href="https://creativecommons.org/licenses/by/2.0/">
+                CC BY
+              </a>)
+            </p>
+            <p>
+              Flickr: <a href="https://flic.kr/p/gjbhpa">
+                Samsung Galaxy Note 3
+              </a> by <a href="https://www.flickr.com/photos/janitors/">
+                Kārlis Dambrāns
+              </a> (<a href="https://creativecommons.org/licenses/by/2.0/">
+                CC BY
+              </a>)
+            </p>
+            <p>
+              GameDev.js Jam theme - taken from
+              <a href="https://gamedevjs.com/competitions/gamedev-js-jam-2020-theme-announcement/">
+                the announcement post
+              </a>
+            </p>
+            <p>
+              Flickr: <a href="https://flic.kr/p/6B2VN">
+                Code World
+              </a> by <a href="https://www.flickr.com/photos/davidrn/">
+                David
+              </a> (<a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">
+                CC BY-NC-ND
+              </a>)
+            </p>
+            <p>
+              Flickr: <a href="https://flic.kr/p/sbob59">
+                Fugu
+              </a> by <a href="https://www.flickr.com/photos/williamnyk/">
+                williamnyk
+              </a> (<a href="https://creativecommons.org/licenses/by-nc/2.0/">
+                CC BY-NC
+              </a>)
+            </p>
+            <p>
+              Flickr: <a href="https://flic.kr/p/FZAH7Y">
+                Week 15 - Magic Hour
+              </a> by <a href="https://www.flickr.com/photos/meddygarnet/">
+                Morgan
+              </a> (<a href="https://creativecommons.org/licenses/by/2.0/">
+                CC BY
+              </a>)
+            </p>
+          </section>
+          <section data-background-image="marvin.jpg" data-background-opacity="0.3">
+            <h2>Questions?</h2>
+            <p>Thanks for listening!</p>
+          </section>
+        </section>
+      </div>
+    </div>
+    <script src="./reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        progress: false,
+        showNotes: false
+      });
+    </script>
+  </body>
+</html>
