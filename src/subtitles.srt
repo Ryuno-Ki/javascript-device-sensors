@@ -1,0 +1,244 @@
+﻿1
+00:00:01,140 --> 00:00:04,300
+Welcome, this is my first time I'm talking at FOSDEM.
+
+2
+00:00:04,760 --> 00:00:06,880
+You can follow along the slides via the link.
+
+3
+00:00:07,440 --> 00:00:11,680
+By the time this airs I hope to be able to provide subtitles for download.
+
+4
+00:00:12,240 --> 00:00:17,900
+The content will be close to speaker notes you can find either on the right hand
+or at the bottom, depending on your screen.
+
+5
+00:00:18,720 --> 00:00:22,220
+My name is André Jaenisch.
+I'm currently working as Software Engineer at Jambit.
+
+6
+00:00:22,520 --> 00:00:24,920
+It's a medium-sized software provider from Germany.
+
+7
+00:00:25,460 --> 00:00:27,740
+This talk has nothing to do with my work.
+
+8
+00:00:28,460 --> 00:00:32,840
+Since this reveal.js presentation is pre-recorded using OBS Studio
+
+9
+00:00:33,320 --> 00:00:35,420
+please ask your questions at the end.
+
+10
+00:00:36,240 --> 00:00:40,540
+In between you'll find scenes taken with ScreenCam on Android.
+
+11
+00:00:41,700 --> 00:00:46,700
+I'd welcome if you'd allow me to
+add your comments to the presentation slides afterwards
+
+12
+00:00:47,480 --> 00:00:49,340
+Please tell me, if you want to opt-in.
+
+13
+00:00:50,140 --> 00:00:57,760
+Unless otherwise noted, the content is made available under
+the Creative Commons Attribution 4.0 International license.
+
+14
+00:00:59,960 --> 00:01:02,160
+Let's start with Responsive Web Design!
+
+15
+00:01:02,780 --> 00:01:05,880
+I'm quite sure you ran into this picture in some form before.
+
+16
+00:01:06,260 --> 00:01:14,240
+It's a typical marketing image to depict a web app
+that's usable on different devices by adjusting the layout accordingly.
+
+17
+00:01:15,060 --> 00:01:16,240
+… but …
+
+18
+00:01:16,560 --> 00:01:19,860
+What if I told you that this approach could fell short?
+
+19
+00:01:21,240 --> 00:01:25,660
+How would you classify this Samsung Galaxy Note 3 with a pen?
+
+20
+00:01:26,040 --> 00:01:27,140
+Is it a mobile?
+
+21
+00:01:27,180 --> 00:01:30,260
+It's small enough to get counted as one.
+
+22
+00:01:30,260 --> 00:01:32,640
+But you have a pointer device - the pen.
+
+23
+00:01:33,340 --> 00:01:34,020
+… so …
+
+24
+00:01:34,100 --> 00:01:36,460
+… designing for it like for a desktop?
+
+25
+00:01:37,080 --> 00:01:40,540
+You'd waste real screen estate otherwise after all.
+
+26
+00:01:41,660 --> 00:01:45,100
+While I was preparing for a Game Jam in early 2020 …
+
+27
+00:01:45,400 --> 00:01:50,580
+I ran across an article on Mozilla Developer Network
+regarding Sensor APIs.
+
+28
+00:01:51,220 --> 00:01:54,680
+I was aware of the ability to recognise motion
+
+29
+00:01:55,120 --> 00:01:56,480
+and orientation
+
+30
+00:01:56,820 --> 00:01:59,120
+from my days with Firefox OS
+
+31
+00:01:59,520 --> 00:02:02,720
+but by now, there are more Sensor APIs available.
+
+32
+00:02:03,560 --> 00:02:05,640
+This talk will show you some tech demos.
+
+33
+00:02:06,440 --> 00:02:09,360
+They're not ready for production usage yet in general.
+
+34
+00:02:09,700 --> 00:02:15,080
+Since normally you'll need to toggle a flag in the browser to get access to the underlying API.
+
+35
+00:02:15,700 --> 00:02:18,960
+But that shouldn't stop you to show off what's possible on the web!
+
+36
+00:02:20,240 --> 00:02:23,180
+My first demo is called „What's the user doing?”
+
+37
+00:02:23,580 --> 00:02:25,880
+It's a showcase I run into years ago.
+
+38
+00:02:26,240 --> 00:02:29,440
+It highlights the impact on privacy sensor data can have.
+
+39
+00:02:30,860 --> 00:02:36,177
+You can see I can tell whether
+the user is sitting, walking, taking a picture.
+
+40
+00:02:36,355 --> 00:02:42,044
+I was even able to test like I lay down the phone on the desk.
+
+41
+00:02:44,577 --> 00:02:51,155
+This is normally not data you want to hand out without second thought.
+
+42
+00:02:52,444 --> 00:02:59,266
+After my Game Jam I decided to create a small demo site
+which runs some primitive checks on your device capabilities.
+
+43
+00:02:59,466 --> 00:03:05,155
+Note, that some of this is done with CSS and some of it is with JavaScript.
+
+44
+00:03:05,222 --> 00:03:10,911
+so you have Media Query for example for the hover,
+for detecting Pointer Devices, Aspect ratios
+
+45
+00:03:10,910 --> 00:03:12,488
+Colours, orientation.
+
+46
+00:03:13,644 --> 00:03:20,022
+I'm not sure what colours is meant to do
+but I can think of use cases for example for e-book readers.
+
+47
+00:03:21,022 --> 00:03:28,844
+Since I created the page I started to design tooltips based on
+the hover Media Query instead of guessing from the screen size.
+
+48
+00:03:31,333 --> 00:03:34,533
+Orientation could be used if you have certain criteria.
+
+49
+00:03:34,530 --> 00:03:40,733
+For example, you have a sidebar which is needed and the thing you want to show is next to it.
+
+50
+00:03:42,155 --> 00:03:47,622
+Device Motion is the movement of a device in the room.
+
+51
+00:03:48,000 --> 00:03:50,688
+Orientation is how you hold it.
+
+52
+00:03:53,111 --> 00:03:56,688
+Accelerometer measures the velocity.
+
+53
+00:03:57,222 --> 00:04:02,488
+Ambient Light Level measures the relative light around the device.
+
+54
+00:04:03,355 --> 00:04:05,311
+I have a small demo for it.
+
+55
+00:04:05,844 --> 00:04:09,666
+Web Bluetooth is available on Chrome
+but also only behind a flag.
+
+56
+00:04:10,844 --> 00:04:13,266
+I've got something prepared for that for you.
+
+57
+00:04:13,777 --> 00:04:17,800
+Geolocation should be known from for example map apps.
+
+58
+00:04:17,800 --> 00:04:19,800
+Gyroscope is a compass so to speak.
+
